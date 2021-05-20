@@ -1,13 +1,12 @@
 Trabalho 1 - Clima e Recursos Hidricos
 ================
-Tais
 17 de maio de 2021
 
 #### Passo 1: download dos dados da Climatic Research Unit (CRU)
 
-Os dados estimados de precipitacao da CRU sao disponibilizados online e podem ser baixados manualmente. Os dados mais recentes de precipitacao disponilizados pela CRU (4.05) estao armazenados [nesse link](%22https://crudata.uea.ac.uk/cru/data/hrg/cru_ts_4.05/cruts.2103051243.v4.05/pre/%22). Os dados sao disponibilizados no formato netCDF, bastante comum para dados climaticos. Baixe o arquivo, descompacte e armazene na mesma pasta em que o codigo estiver salvo ou em uma pasta chamada dados.
+Os dados estimados de precipitacao da CRU sao disponibilizados online e podem ser baixados manualmente. Os dados mais recentes de precipitacao elaborados pela CRU (4.05) estao armazenados [nesse link](%22https://crudata.uea.ac.uk/cru/data/hrg/cru_ts_4.05/cruts.2103051243.v4.05/pre/%22). Os dados sao disponibilizados no formato netCDF, bastante comum para dados climaticos. Baixe o arquivo, descompacte e armazene na mesma pasta em que o codigo estiver salvo ou em uma pasta chamada dados.
 
-Esse tutorial explica bem o procedimento de leitura de arquivos netCDF: <https://thiagodossantos.com/pt/post/2-raster_basic_operations/>
+Esse tutorial explica de forma bem completa como manusear arquivos NetCDF no R: <https://thiagodossantos.com/pt/post/2-raster_basic_operations/>
 
 ``` r
 library(ncdf4)

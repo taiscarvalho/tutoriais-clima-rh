@@ -38,6 +38,7 @@ A unidade de tempo dos dados de precipitacao corresponde ao numero de dias apos 
 ``` r
 t_format <- lubridate::ymd("1900-01-01") + lubridate::days(t)
 ```
+Em seguida, vamos converter o arquivo nectdf para o formato raster. Também é importante verificar as suas dimensões espaciais.
 
 ``` r
 pre1.brick <- brick(ncfname)

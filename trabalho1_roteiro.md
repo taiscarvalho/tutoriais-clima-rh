@@ -1,10 +1,10 @@
-Trabalho 1 - Clima e Recursos Hidricos
+Trabalho 1 - Clima e Recursos Hídricos
 ================
 17 de maio de 2021
 
 #### Passo 1: download dos dados da Climatic Research Unit (CRU)
 
-Os dados estimados de precipitacao da CRU sao disponibilizados online e podem ser baixados manualmente. Os dados mais recentes de precipitacao elaborados pela CRU (4.05) estao armazenados [nesse link](https://crudata.uea.ac.uk/cru/data/hrg/cru_ts_4.05/cruts.2103051243.v4.05/pre/). Os dados sao disponibilizados no formato netCDF, bastante comum para dados climaticos. Baixe o arquivo, descompacte e armazene na mesma pasta em que o codigo estiver salvo ou em uma pasta chamada dados.
+Os dados estimados de precipitação da CRU são disponibilizados online e podem ser baixados manualmente. Os dados mais recentes de precipitação elaborados pela CRU (4.05) estão armazenados [nesse link](https://crudata.uea.ac.uk/cru/data/hrg/cru_ts_4.05/cruts.2103051243.v4.05/pre/). Os dados são disponibilizados no formato netCDF, bastante comum para dados climáticos. Baixe o arquivo, descompacte e armazene na mesma pasta em que o código estiver salvo ou em uma pasta chamada dados.
 
 Esse tutorial explica de forma bem completa como manusear arquivos NetCDF no R: <https://thiagodossantos.com/pt/post/2-raster_basic_operations/>
 
@@ -13,7 +13,6 @@ library(ncdf4)
 library(raster)
 library(rgdal)
 library(dplyr)
-library(R.utils)
 ```
 
 ``` r
@@ -23,7 +22,7 @@ ncfname <- "dados/cru_ts4.05.1901.2020.pre.dat.nc.gz"
 
 #### Passo 2: Leitura do arquivo netCDF
 
-A partir das funcoes abaixo, eh possivel abrir e explorar o arquivo netCDF.
+A partir das funções abaixo, é possivel abrir e explorar o arquivo netCDF.
 
 ``` r
 ncfname <- "dados/cru_ts4.05.1901.2020.pre.dat.nc"
@@ -33,7 +32,7 @@ tunits <- ncatt_get(ncin, "time", "units")
 nt <- dim(t)
 ```
 
-A unidade de tempo dos dados de precipitacao corresponde ao numero de dias apos 01/01/1901. Vamos converter para o formato padrao de data.
+A unidade de tempo dos dados de precipitação corresponde ao numero de dias após 01/01/1901. Vamos converter para o formato padrão de data.
 
 ``` r
 t_format <- lubridate::ymd("1900-01-01") + lubridate::days(t)
@@ -51,9 +50,9 @@ extent(pre1.brick)
     ## ymin       : -90 
     ## ymax       : 90
 
-#### Passo 3: Cortar raster para a regiao de interesse
+#### Passo 3: Cortar raster para a região de interesse
 
-Leia o arquivo shapefile correspondente ao contorno da bacia de interesse. Sera necessario converter o sistema de coordenadas do shapefile para o mesmo sistema do raster com os dados de precipitacao.
+Leia o arquivo shapefile correspondente ao contorno da bacia de interesse. Será necessário converter o sistema de coordenadas do shapefile para o mesmo sistema do raster com os dados de precipitação.
 
 ``` r
 shapefile <- readOGR("dados/36290000.shp")
@@ -71,7 +70,7 @@ plot(shapefile)
 
 ![](trabalho1_roteiro_files/figure-markdown_github/unnamed-chunk-6-1.png)
 
-Agora, sera possivel fazer o recorte do raster a partir do shapefile da regiao de interesse.
+Agora, será possível fazer o recorte do raster a partir do shapefile da região de interesse.
 
 ``` r
 pre1.mask <- crop(pre1.brick[[c(1:nt)]], shapefile)
@@ -79,7 +78,7 @@ pre1.mask <- crop(pre1.brick[[c(1:nt)]], shapefile)
 
 #### Passo 4: Extracao da serie de precipitacao para a regiao de interesse
 
-O ultimo passo eh a extracao da serie temporal de precipitacao para o recorte extraido no passo anterior. O valor da precipitacao mensal sera a media da precipitacao mensal dos pixels contidos no recorte.
+O ultimo passo é a extração da serie temporal de precipitação para o recorte extraído no passo anterior. O valor da precipitação mensal sera a média da precipitação mensal dos pixels contidos no recorte.
 
 ``` r
 pre1.df <- as.data.frame(pre1.mask)
